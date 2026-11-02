@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://s60eh4hye7wd"]
+
+[ext_resource type="Script" uid="uid://48e0a83mtgdt" path="res://scripts/player.gd" id="1_f3sb7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fj7yv"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_tlwt5"]
+sky_material = SubResource("ProceduralSkyMaterial_fj7yv")
+
+[sub_resource type="Environment" id="Environment_aqk2v"]
+background_mode = 2
+sky = SubResource("Sky_tlwt5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ysd2"]
+albedo_color = Color(0, 0.48644257, 0.16709042, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_etibl"]
+albedo_color = Color(0.5947975, 0.19741291, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_amkdi"]
+albedo_color = Color(3.5616756e-06, 0.58223706, 0.7873321, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46oso"]
+albedo_color = Color(0.77007055, 0.59612745, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_etibl"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_etibl"]
+
+[node name="World" type="Node3D" unique_id=146129250]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=387133931]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2092000194]
+environment = SubResource("Environment_aqk2v")
+
+[node name="Flor" type="CSGBox3D" parent="." unique_id=502116056]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+use_collision = true
+size = Vector3(40, 0.5, 40)
+material = SubResource("StandardMaterial3D_6ysd2")
+
+[node name="Boxes" type="Node3D" parent="." unique_id=122154739]
+
+[node name="Box" type="CSGBox3D" parent="Boxes" unique_id=394494132]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3845215, 0, -12.763428)
+use_collision = true
+size = Vector3(3.769043, 1, 2.5268555)
+material = SubResource("StandardMaterial3D_etibl")
+
+[node name="Box2" type="CSGBox3D" parent="Boxes" unique_id=542202032]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.123796, 0.39819336, -12.763428)
+use_collision = true
+size = Vector3(3.769043, 1.7963867, 2.5268555)
+material = SubResource("StandardMaterial3D_amkdi")
+
+[node name="Box3" type="CSGBox3D" parent="Boxes" unique_id=350341144]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3453536, 1.7156696, -11.974426)
+use_collision = true
+size = Vector3(1.3259277, 0.94799805, 0.94885254)
+material = SubResource("StandardMaterial3D_amkdi")
+
+[node name="Box4" type="CSGBox3D" parent="Boxes" unique_id=594830574]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8509655, 2.6742554, -10.113986)
+use_collision = true
+size = Vector3(3.3688965, 0.256958, 7.4851074)
+material = SubResource("StandardMaterial3D_46oso")
+
+[node name="Walls" type="Node3D" parent="." unique_id=228361855]
+
+[node name="Wall" type="CSGBox3D" parent="Walls" unique_id=389414462]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 2, 0)
+use_collision = true
+size = Vector3(0.5, 5, 40)
+
+[node name="Wall2" type="CSGBox3D" parent="Walls" unique_id=1708376409]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 2, 0)
+use_collision = true
+size = Vector3(0.5, 5, 40)
+
+[node name="Wall3" type="CSGBox3D" parent="Walls" unique_id=16128272]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2, 20)
+use_collision = true
+size = Vector3(0.5, 5, 40)
+
+[node name="Wall4" type="CSGBox3D" parent="Walls" unique_id=595187989]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2, -20)
+use_collision = true
+size = Vector3(0.5, 5, 40)
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=155320094]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_f3sb7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1342732907]
+mesh = SubResource("CapsuleMesh_etibl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=686875559]
+shape = SubResource("CapsuleShape3D_etibl")
+
+[node name="Head" type="Node3D" parent="Player" unique_id=1503335646]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player/Head" unique_id=2128514564]
