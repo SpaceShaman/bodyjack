@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://s60eh4hye7wd"]
 
 [ext_resource type="Script" uid="uid://48e0a83mtgdt" path="res://scripts/player.gd" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://8cas5tau2uif" path="res://scripts/player_controller.gd" id="2_controller"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fj7yv"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -59,13 +60,13 @@ size = Vector3(3.769043, 1.7963867, 2.5268555)
 material = SubResource("StandardMaterial3D_amkdi")
 
 [node name="Box3" type="CSGBox3D" parent="Boxes" unique_id=350341144]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3453536, 1.7156696, -11.974426)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9423175, 2.028902, -11.131989)
 use_collision = true
-size = Vector3(1.3259277, 0.94799805, 0.94885254)
+size = Vector3(2.175171, 0.3215332, 2.633728)
 material = SubResource("StandardMaterial3D_amkdi")
 
 [node name="Box4" type="CSGBox3D" parent="Boxes" unique_id=594830574]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8509655, 2.6742554, -10.113986)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.000991, 2.6742554, -8.214051)
 use_collision = true
 size = Vector3(3.3688965, 0.256958, 7.4851074)
 material = SubResource("StandardMaterial3D_46oso")
@@ -102,7 +103,44 @@ mesh = SubResource("CapsuleMesh_etibl")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=686875559]
 shape = SubResource("CapsuleShape3D_etibl")
 
-[node name="Head" type="Node3D" parent="Player" unique_id=1503335646]
+[node name="ViewAnchor" type="Marker3D" parent="Player" unique_id=144370564]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Player/Head" unique_id=2128514564]
+[node name="Player2" type="CharacterBody3D" parent="." unique_id=251635782]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -12.111372, 4.0299487, -6)
+script = ExtResource("1_f3sb7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player2" unique_id=1271605183]
+material_override = SubResource("StandardMaterial3D_46oso")
+mesh = SubResource("CapsuleMesh_etibl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player2" unique_id=1469519080]
+shape = SubResource("CapsuleShape3D_etibl")
+
+[node name="ViewAnchor" type="Marker3D" parent="Player2" unique_id=566414734]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="PlayerController" type="Node3D" parent="." unique_id=516422376 node_paths=PackedStringArray("initial_character")]
+script = ExtResource("2_controller")
+initial_character = NodePath("../Player")
+
+[node name="Head" type="Node3D" parent="PlayerController" unique_id=964105304]
+
+[node name="Camera3D" type="Camera3D" parent="PlayerController/Head" unique_id=1765487009]
+current = true
+
+[node name="HUD" type="CanvasLayer" parent="PlayerController" unique_id=409802311]
+
+[node name="Crosshair" type="Label" parent="PlayerController/HUD" unique_id=88919954]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -12.0
+offset_right = 8.0
+offset_bottom = 12.0
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
