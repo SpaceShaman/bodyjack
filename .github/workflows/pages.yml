@@ -1,0 +1,60 @@
+name: Publish Web game
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v6
+
+      - name: Install Godot and export templates
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: "4.7.2"
+          use-dotnet: false
+          include-templates: true
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Import project
+        run: godot --headless --path src --editor --import --quit
+
+      - name: Export Web game
+        run: |
+          mkdir -p build/web
+          godot --headless --path src --export-release "Web" "$GITHUB_WORKSPACE/build/web/index.html"
+
+      - name: Upload website
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: build/web
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
