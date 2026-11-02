@@ -94,7 +94,7 @@ use_collision = true
 size = Vector3(0.5, 5, 40)
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=155320094]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 4)
 script = ExtResource("1_f3sb7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1342732907]
@@ -118,6 +118,20 @@ mesh = SubResource("CapsuleMesh_etibl")
 shape = SubResource("CapsuleShape3D_etibl")
 
 [node name="ViewAnchor" type="Marker3D" parent="Player2" unique_id=566414734]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Player3" type="CharacterBody3D" parent="." unique_id=1052785514]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.7624874, 1.5671129, -13.589561)
+script = ExtResource("1_f3sb7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player3" unique_id=698662761]
+material_override = SubResource("StandardMaterial3D_46oso")
+mesh = SubResource("CapsuleMesh_etibl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player3" unique_id=1646089188]
+shape = SubResource("CapsuleShape3D_etibl")
+
+[node name="ViewAnchor" type="Marker3D" parent="Player3" unique_id=1168198110]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="PlayerController" type="Node3D" parent="." unique_id=516422376 node_paths=PackedStringArray("initial_character")]
